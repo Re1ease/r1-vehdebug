@@ -82,6 +82,14 @@ Citizen.CreateThread(function()
 				if Config.ResetLabel ~= "nil" then 
 					drawTxt(0.5, 0.62, 0.4,0.4,0.30, "["..Config.ResetLabel.."] Reset Numbers", 255, 214, 129, 255)
 				end
+
+				if Config.UseTeleport then 
+					drawTxt(0.5, 0.64, 0.4,0.4,0.30, "["..Config.TeleportToCoordsLabel.."] Teleport", 255, 214, 129, 255)
+				end
+
+				if Config.UseDeleteVehicle then 
+					drawTxt(0.5, 0.66, 0.4,0.4,0.30, "["..Config.DeleteVehicleKeyLabel.."] Delete Vehicle", 255, 214, 129, 255)
+				end
 			else
 				drawTxt(0.8, 0.52, 0.4,0.4,0.30, "You are not in a vehicle", 255, 75, 71, 255)
 			end
@@ -118,6 +126,23 @@ Citizen.CreateThread(function()
 					print("Fixed vehicle")
 				else
 					exports['mythic_notify']:DoHudText("Inform", "Fixed vehicle", 3000)
+				end
+			end 
+			if Config.UseTeleport then
+				if (IsControlJustReleased(1, Config.TeleportToCoordsKey)) then
+					SetEntityCoordsNoOffset(veh, Config.TeleportToCoords, false, false, false, false)
+					SetEntityHeading(veh, Config.TeleportToCoordsHeading)
+
+					if Config.Notif ~= "MYTHIC" then 
+						print("Teleported to Coords")
+					else
+						exports['mythic_notify']:DoHudText("Inform", "Teleported to Coords", 3000)
+					end
+				end
+			end
+			if Config.UseDeleteVehicle then
+				if (IsControlJustReleased(1, Config.DeleteVehicleKey)) then
+					DeleteEntity(veh)
 				end
 			end
 		else
