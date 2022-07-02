@@ -1,4 +1,4 @@
-# r1_vehdebug
+# r1-vehdebug
 
 To toggle the event, type **vehdebug** in console/chat.
 
